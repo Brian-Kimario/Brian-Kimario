@@ -11,7 +11,7 @@ the checks that stop bad data before it lands.
 
 <br>
 
-[![Email](https://img.shields.io/badge/kimariobrian63@gmail.com-05070f?style=for-the-badge&logo=gmail&logoColor=38bdf8&labelColor=05070f)](mailto:kimariobrian63@gmail.com)
+[![Email](https://img.shields.io/badge/kimario.brian.89@gmail.com-05070f?style=for-the-badge&logo=gmail&logoColor=38bdf8&labelColor=05070f)](mailto:kimario.brian.89@gmail.com)
 [![GitHub](https://img.shields.io/badge/Brian--Kimario-05070f?style=for-the-badge&logo=github&logoColor=a78bfa&labelColor=05070f)](https://github.com/Brian-Kimario)
 
 </div>

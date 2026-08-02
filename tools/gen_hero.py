@@ -248,7 +248,7 @@ DOSSIER = [
     ("Open.To", "Data engineering internships · 2026", AMBER),
     None,
     ("#", "CONTACT", None),
-    ("Grid.Mail", "kimariobrian63@gmail.com", CYAN),
+    ("Grid.Mail", "kimario.brian.89@gmail.com", CYAN),
     ("Grid.GitHub", "github.com/Brian-Kimario", CYAN),
 ]
 
