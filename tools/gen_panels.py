@@ -83,7 +83,7 @@ def projects_svg():
     h = top + rows * ch + (rows - 1) * gy + 18
 
     out = [panel_open(W, h, "PROJECTS.LIST",
-                      "6 selected · 3 shipped to production")]
+                      "6 selected · 2 public · 4 private")]
 
     for i, (name, status, desc, langs, tags) in enumerate(PROJECTS):
         x = 16 + (i % 2) * (cw + gx)

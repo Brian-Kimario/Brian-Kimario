@@ -244,7 +244,7 @@ DOSSIER = [
     None,
     ("#", "SIGNAL", None),
     ("Certified", "IBM Java Fund. · Coursera Py4DS", MINT),
-    ("Currently", "Scraping 2M+ exam records into a warehouse", TEXT),
+    ("Currently", "Parsing NECTA result pages into a queryable schema", TEXT),
     ("Open.To", "Data engineering internships · 2026", AMBER),
     None,
     ("#", "CONTACT", None),

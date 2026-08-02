@@ -24,7 +24,8 @@ I spend most of my time on **Matokeo** — a civic data platform for Tanzania's
 NECTA examination results. It scrapes results the government publishes as HTML,
 parses them into a multi-level relational schema, and serves them through a
 FastAPI service that a Next.js frontend reads. No page touches the database
-directly; the API is the only data source. ACSEE is live, CSEE and PSLE are next.
+directly; the API is the only data source. ACSEE is covered today; CSEE and
+PSLE are next.
 
 The rest of my repos are me getting good at the parts that project needs:
 orchestration (Airflow 3, Prefect), warehousing (Postgres, DuckDB, star schemas),
