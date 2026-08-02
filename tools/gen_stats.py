@@ -7,8 +7,8 @@ library so the workflow needs no pip install step.
 
     GITHUB_TOKEN=... python3 tools/gen_stats.py
 
-The query is scoped to public, non-fork repositories, so the counters and the
-language mix describe exactly the work a visitor can go and open.
+The query is scoped to public, non-fork repositories, so every number describes
+exactly the work a visitor can go and open.
 """
 
 import json
@@ -27,8 +27,8 @@ LOGIN = os.environ.get("GH_LOGIN", "Brian-Kimario")
 W = 1000
 
 # Repos that exist but aren't work worth counting: numbered lab submissions and
-# a couple of false starts. Excluded from both the count and the language mix so
-# the panel measures the same set of work the projects panel shows.
+# a couple of false starts. Excluded so the panel measures the same body of work
+# the projects panel shows.
 EXCLUDE_PREFIXES = ("24bda", "24-bda")
 EXCLUDE_NAMES = {"2b", "failed-2b"}
 
@@ -38,16 +38,17 @@ def featured(repos):
             if not r["name"].lower().startswith(EXCLUDE_PREFIXES)
             and r["name"].lower() not in EXCLUDE_NAMES]
 
+
 QUERY = """
 query($login:String!) {
   user(login:$login) {
-    followers { totalCount }
     repositories(first:100, ownerAffiliations:OWNER, isFork:false,
-                 privacy:PUBLIC) {
+                 privacy:PUBLIC, orderBy:{field:PUSHED_AT, direction:DESC}) {
       totalCount
       nodes {
         name
-        stargazerCount
+        pushedAt
+        primaryLanguage { name color }
         languages(first:12, orderBy:{field:SIZE, direction:DESC}) {
           edges { size node { name color } }
         }
@@ -106,6 +107,18 @@ def streaks(weeks):
     return current, longest
 
 
+def ago(iso):
+    """Coarse relative age — 'today', '3d ago', '2w ago', '5mo ago'."""
+    delta = (datetime.now(timezone.utc)
+             - datetime.fromisoformat(iso.replace("Z", "+00:00"))).days
+    if delta <= 0:
+        return "today"
+    for span, unit in ((365, "y"), (30, "mo"), (7, "w")):
+        if delta >= span:
+            return f"{delta // span}{unit} ago"
+    return f"{delta}d ago"
+
+
 def top_languages(repos, limit=6):
     totals, colours = {}, {}
     for repo in repos:
@@ -123,8 +136,6 @@ def build(user):
     cal = cc["contributionCalendar"]
     repos = featured(user["repositories"]["nodes"])
     current, longest = streaks(cal["weeks"])
-    stars = sum(r["stargazerCount"] for r in repos)
-    langs = top_languages(repos)
 
     h = 268
     out = [panel_open(W, h, "SIGNAL.LIVE",
@@ -165,27 +176,27 @@ def build(user):
         out.append("</g>")
     out.append(f'<line x1="640" y1="58" x2="640" y2="{h - 26}" stroke="{EDGE}"/>')
 
-    # ---- language mix
-    out.append(section_label(672, 76, "LANGUAGE MIX · PUBLIC REPOS"))
+    # ---- recent pushes
+    #
+    # This slot used to hold an aggregate language mix. Across four public repos
+    # that measures verbosity, not focus — one Redux app outweighs every DAG by
+    # bytes — and the per-project bars in projects.svg already break it down.
+    # Recent pushes say something the rest of the panel doesn't: still shipping.
+    out.append(section_label(672, 76, "RECENT PUSHES"))
     bx, bw = 672, W - 672 - 34
-    out.append(f'<rect x="{bx}" y="94" width="{bw}" height="7" rx="3.5"'
-               f' fill="#0d1424"/>')
-    off = 0.0
-    for _, share, colour in langs:
-        seg = bw * share
-        out.append(f'<rect x="{bx + off:.1f}" y="94" width="{max(seg - 2, 1):.1f}"'
-                   f' height="7" rx="3.5" fill="{colour}"/>')
-        off += seg
-    # One column, not two: names like "Jupyter Notebook" collide in two.
-    for i, (name, share, colour) in enumerate(langs):
-        cy = 126 + i * 23
-        out.append(f'<g>{reveal(0.2 + i * .07)}')
+    for i, repo in enumerate(repos[:5]):
+        cy = 104 + i * 30
+        colour = (repo["primaryLanguage"] or {}).get("color") or MUTED
+        lang = (repo["primaryLanguage"] or {}).get("name") or "—"
+        out.append(f'<g>{reveal(0.2 + i * .08)}')
         out.append(f'<circle cx="{bx + 4}" cy="{cy - 4}" r="4" fill="{colour}"/>')
         out.append(f'<text x="{bx + 16}" y="{cy}" font-family="{MONO}"'
-                   f' font-size="11.5" fill="{TEXT}">{esc(name)}</text>')
+                   f' font-size="11.5" fill="{TEXT}">{esc(repo["name"])}</text>')
         out.append(f'<text x="{bx + bw}" y="{cy}" text-anchor="end"'
-                   f' font-family="{MONO}" font-size="11" fill="{MUTED}">'
-                   f'{share * 100:.1f}%</text>')
+                   f' font-family="{MONO}" font-size="10.5" fill="{MUTED}">'
+                   f'{esc(ago(repo["pushedAt"]))}</text>')
+        out.append(f'<text x="{bx + 16}" y="{cy + 13}" font-family="{MONO}"'
+                   f' font-size="10" fill="{MUTED}">{esc(lang)}</text>')
         out.append("</g>")
 
     out.append(panel_close())
