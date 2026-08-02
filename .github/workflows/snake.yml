@@ -1,0 +1,33 @@
+name: Contribution snake
+
+on:
+  schedule:
+    - cron: "37 4 * * *"      # daily, 20 min after the stats refresh
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  snake:
+    runs-on: ubuntu-latest
+    steps:
+      # Palette matches theme.py, so the snake reads as part of the profile
+      # rather than a bolted-on widget.
+      - uses: Platane/snk@v3
+        id: snake
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake.svg?color_snake=%2338bdf8&color_dots=%230d1424,%23163a5c,%231f6feb,%2338bdf8,%23a78bfa
+
+      # Published to a separate branch so the huge generated file never lands
+      # in main's history.
+      - uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

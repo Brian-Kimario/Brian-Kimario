@@ -1,0 +1,41 @@
+name: Refresh live panels
+
+on:
+  schedule:
+    - cron: "17 4 * * *"      # daily, 04:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "tools/**"
+      - ".github/workflows/refresh.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Uses a PAT when available so private-repo contributions are counted;
+      # falls back to the built-in token, which only sees public activity.
+      - name: Build stats panel
+        working-directory: tools
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
+          GH_LOGIN: ${{ github.repository_owner }}
+        run: python3 gen_stats.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/stats.svg
+          git diff --staged --quiet || git commit -m "chore: refresh stats panel"
+          git push

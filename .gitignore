@@ -1,0 +1,4 @@
+__pycache__/
+# Full-resolution headshot: only needed to regenerate portrait.pgm, and it's
+# 2 MB. Keep it locally, see BUILD.md for the ffmpeg command that consumes it.
+tools/portrait_src.jpg
