@@ -8,9 +8,9 @@
 <rect width="1000" height="268" rx="14" fill="#05070f"/>
 <rect x=".5" y=".5" width="999" height="267" rx="14" fill="none" stroke="#16203a"/>
 <text x="18" y="27" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" letter-spacing="2.6" fill="#38bdf8">SIGNAL.LIVE</text>
-<text x="982" y="27" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">synced 2026-08-02 17:13 UTC</text>
+<text x="982" y="27" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">synced 2026-08-02 17:14 UTC</text>
 <line x1="18" y1="38" x2="982" y2="38" stroke="#16203a"/>
-<text x="34" y="118" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="62" font-weight="700" fill="url(#grad)">71</text>
+<text x="34" y="118" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="62" font-weight="700" fill="url(#grad)">72</text>
 <text x="36" y="140" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" letter-spacing="1.8" fill="#5b6b86">CONTRIBUTIONS · LAST 12 MONTHS</text>
 <text x="36" y="182" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="13" fill="#fbbf24">3-day streak</text>
 <text x="36" y="204" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11" fill="#5b6b86">longest: 3 days</text>
@@ -26,40 +26,46 @@
 </g>
 <g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.118;0.238;1" values="0;0;1;1"/>
 <text x="332" y="162" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="12" fill="#5b6b86">Public repos</text>
-<text x="600" y="162" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="14" font-weight="600" fill="#34d399">4</text>
+<text x="600" y="162" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="14" font-weight="600" fill="#34d399">5</text>
 </g>
 <g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.155;0.275;1" values="0;0;1;1"/>
 <text x="332" y="189" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="12" fill="#5b6b86">Repos touched</text>
-<text x="600" y="189" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="14" font-weight="600" fill="#fbbf24">19</text>
+<text x="600" y="189" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="14" font-weight="600" fill="#fbbf24">20</text>
 </g>
 <g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.191;0.311;1" values="0;0;1;1"/>
 <text x="332" y="216" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="12" fill="#5b6b86">Languages used</text>
-<text x="600" y="216" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="14" font-weight="600" fill="#dbe4f0">8</text>
+<text x="600" y="216" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="14" font-weight="600" fill="#dbe4f0">9</text>
 </g>
 <line x1="640" y1="58" x2="640" y2="242" stroke="#16203a"/>
 <text x="672" y="76" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="9.5" letter-spacing="1.8" fill="#a78bfa">RECENT PUSHES</text>
 <g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.091;0.211;1" values="0;0;1;1"/>
-<circle cx="676" cy="100" r="4" fill="#f1e05a"/>
-<text x="688" y="104" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">dynamic-post-composer</text>
+<circle cx="676" cy="100" r="4" fill="#3572A5"/>
+<text x="688" y="104" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">Brian-Kimario</text>
 <text x="966" y="104" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">today</text>
-<text x="688" y="117" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">JavaScript</text>
+<text x="688" y="117" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">Python</text>
 </g>
 <g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.127;0.247;1" values="0;0;1;1"/>
-<circle cx="676" cy="130" r="4" fill="#3572A5"/>
-<text x="688" y="134" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">etl_weather</text>
-<text x="966" y="134" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">5d ago</text>
-<text x="688" y="147" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">Python</text>
+<circle cx="676" cy="130" r="4" fill="#f1e05a"/>
+<text x="688" y="134" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">dynamic-post-composer</text>
+<text x="966" y="134" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">today</text>
+<text x="688" y="147" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">JavaScript</text>
 </g>
 <g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.164;0.284;1" values="0;0;1;1"/>
-<circle cx="676" cy="160" r="4" fill="#DA5B0B"/>
-<text x="688" y="164" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">kaggle_etl_pipeline</text>
-<text x="966" y="164" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">2w ago</text>
-<text x="688" y="177" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">Jupyter Notebook</text>
+<circle cx="676" cy="160" r="4" fill="#3572A5"/>
+<text x="688" y="164" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">etl_weather</text>
+<text x="966" y="164" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">5d ago</text>
+<text x="688" y="177" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">Python</text>
 </g>
 <g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.200;0.320;1" values="0;0;1;1"/>
-<circle cx="676" cy="190" r="4" fill="#b07219"/>
-<text x="688" y="194" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">JAVA_BASICS</text>
-<text x="966" y="194" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">8mo ago</text>
-<text x="688" y="207" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">Java</text>
+<circle cx="676" cy="190" r="4" fill="#DA5B0B"/>
+<text x="688" y="194" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">kaggle_etl_pipeline</text>
+<text x="966" y="194" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">2w ago</text>
+<text x="688" y="207" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">Jupyter Notebook</text>
+</g>
+<g><animate attributeName="opacity" dur="2.2s" fill="freeze" keyTimes="0;0.236;0.356;1" values="0;0;1;1"/>
+<circle cx="676" cy="220" r="4" fill="#b07219"/>
+<text x="688" y="224" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#dbe4f0">JAVA_BASICS</text>
+<text x="966" y="224" text-anchor="end" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10.5" fill="#5b6b86">8mo ago</text>
+<text x="688" y="237" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace" font-size="10" fill="#5b6b86">Java</text>
 </g>
 </svg>
