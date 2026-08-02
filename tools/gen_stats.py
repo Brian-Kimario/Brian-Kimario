@@ -7,8 +7,8 @@ library so the workflow needs no pip install step.
 
     GITHUB_TOKEN=... python3 tools/gen_stats.py
 
-Private repositories are included when the token can see them, which is the
-point: most of the real work on this profile lives in private repos.
+The query is scoped to public, non-fork repositories, so the counters and the
+language mix describe exactly the work a visitor can go and open.
 """
 
 import json
@@ -26,13 +26,27 @@ ROOT = Path(__file__).resolve().parent.parent
 LOGIN = os.environ.get("GH_LOGIN", "Brian-Kimario")
 W = 1000
 
+# Repos that exist but aren't work worth counting: numbered lab submissions and
+# a couple of false starts. Excluded from both the count and the language mix so
+# the panel measures the same set of work the projects panel shows.
+EXCLUDE_PREFIXES = ("24bda", "24-bda")
+EXCLUDE_NAMES = {"2b", "failed-2b"}
+
+
+def featured(repos):
+    return [r for r in repos
+            if not r["name"].lower().startswith(EXCLUDE_PREFIXES)
+            and r["name"].lower() not in EXCLUDE_NAMES]
+
 QUERY = """
 query($login:String!) {
   user(login:$login) {
     followers { totalCount }
-    repositories(first:100, ownerAffiliations:OWNER, isFork:false) {
+    repositories(first:100, ownerAffiliations:OWNER, isFork:false,
+                 privacy:PUBLIC) {
       totalCount
       nodes {
+        name
         stargazerCount
         languages(first:12, orderBy:{field:SIZE, direction:DESC}) {
           edges { size node { name color } }
@@ -107,7 +121,7 @@ def top_languages(repos, limit=6):
 def build(user):
     cc = user["contributionsCollection"]
     cal = cc["contributionCalendar"]
-    repos = user["repositories"]["nodes"]
+    repos = featured(user["repositories"]["nodes"])
     current, longest = streaks(cal["weeks"])
     stars = sum(r["stargazerCount"] for r in repos)
     langs = top_languages(repos)
@@ -135,7 +149,7 @@ def build(user):
     metrics = [
         ("Commits", cc["totalCommitContributions"], CYAN),
         ("Pull requests", cc["totalPullRequestContributions"], VIOLET),
-        ("Repositories", user["repositories"]["totalCount"], MINT),
+        ("Public repos", len(repos), MINT),
         ("Repos touched", cc["totalRepositoryContributions"], AMBER),
         ("Languages used", len(top_languages(repos, limit=99)), TEXT),
     ]
@@ -152,7 +166,7 @@ def build(user):
     out.append(f'<line x1="640" y1="58" x2="640" y2="{h - 26}" stroke="{EDGE}"/>')
 
     # ---- language mix
-    out.append(section_label(672, 76, "LANGUAGE MIX · ALL REPOS"))
+    out.append(section_label(672, 76, "LANGUAGE MIX · PUBLIC REPOS"))
     bx, bw = 672, W - 672 - 34
     out.append(f'<rect x="{bx}" y="94" width="{bw}" height="7" rx="3.5"'
                f' fill="#0d1424"/>')

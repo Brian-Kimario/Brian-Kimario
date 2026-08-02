@@ -77,9 +77,11 @@ Both are also `workflow_dispatch`, so you can trigger them by hand.
 
 - **Camo caching.** GitHub proxies README images and caches them. A freshly
   pushed panel can take a while to appear. Hard-refresh, or wait it out.
-- **Private contributions.** The contribution total only includes private work
-  if you turn it on: *Settings → Public profile → **Include private
-  contributions on my profile***. Without it the headline number counts public
-  commits only, which for this account is a small fraction of the real total.
+- **Scope.** `gen_stats.py` queries public, non-fork repos only, and skips the
+  numbered lab submissions (see `EXCLUDE_PREFIXES`), so the counters and the
+  language mix describe the same work the projects panel shows. The headline
+  contribution total is whatever GitHub reports for the account — it counts
+  private activity only if *Settings → Public profile → **Include private
+  contributions on my profile*** is enabled.
 - **Reduced motion.** Every animation is disabled under
   `prefers-reduced-motion: reduce`.

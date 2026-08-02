@@ -23,12 +23,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      # Uses a PAT when available so private-repo contributions are counted;
-      # falls back to the built-in token, which only sees public activity.
+      # The built-in token is enough: gen_stats.py only asks for public repos.
       - name: Build stats panel
         working-directory: tools
         env:
-          GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_LOGIN: ${{ github.repository_owner }}
         run: python3 gen_stats.py
 

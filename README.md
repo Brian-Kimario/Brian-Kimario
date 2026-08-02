@@ -4,10 +4,10 @@
 
 <br><br>
 
-**I build the pipeline and the product that sits on top of it.**
+**I like the part of the job that happens before the dashboard.**
 
-Data engineering student from Tanzania 🇹🇿, currently turning my country's
-public exam results into something you can actually query.
+Data engineering student from Tanzania 🇹🇿 — orchestration, warehousing, and
+the checks that stop bad data before it lands.
 
 <br>
 
@@ -18,29 +18,28 @@ public exam results into something you can actually query.
 
 <br>
 
-## ◤ What I'm actually doing
+## ◤ What I'm working on
 
-I spend most of my time on **Matokeo** — a civic data platform for Tanzania's
-NECTA examination results. It scrapes results the government publishes as HTML,
-parses them into a multi-level relational schema, and serves them through a
-FastAPI service that a Next.js frontend reads. No page touches the database
-directly; the API is the only data source. ACSEE is covered today; CSEE and
-PSLE are next.
+Pipelines, mostly. An Airflow 3 DAG on Astro Runtime that pulls weather data,
+gates it on quality checks and upserts it idempotently into Postgres. A Prefect
+flow that turns a raw Kaggle export into a star schema, tests it, and loads it
+into a DuckDB warehouse. The interesting part of both is never the happy path —
+it's what happens on a retry, a duplicate, or a column that changed shape
+upstream.
 
-The rest of my repos are me getting good at the parts that project needs:
-orchestration (Airflow 3, Prefect), warehousing (Postgres, DuckDB, star schemas),
-and enough frontend to ship the thing instead of handing someone a CSV.
+I build the application layer too, because a pipeline whose output nobody can
+see isn't finished. Everything below is public and runnable.
 
 <br>
 
 <div align="center">
-<img src="./assets/stack.svg" width="100%" alt="Toolchain: orchestration, data and storage, languages, application, platform">
+<img src="./assets/projects.svg" width="100%" alt="Public projects: ETLWeather, Local ETL Pipeline, Dynamic Post Composer">
 </div>
 
 <br>
 
 <div align="center">
-<img src="./assets/projects.svg" width="100%" alt="Selected projects: Matokeo, ETLWeather, Kaggle ETL Pipeline, Admissions System, Dynamic Post Composer, Lakehouse Lab">
+<img src="./assets/stack.svg" width="100%" alt="Toolchain: orchestration, data and storage, languages, application, platform">
 </div>
 
 <br>
@@ -59,11 +58,11 @@ and enough frontend to ship the thing instead of handing someone a CSV.
 
 ## ◤ Where I'm going
 
-Data engineering, properly. The goal for 2026 is an internship where pipelines
-break in ways my laptop can't simulate — real volume, real lateness, real
-upstream schema changes at 3am. Until then I keep building things that have to
-survive contact with actual data: government HTML that changes format without
-warning, exam records that don't reconcile, sources with no API at all.
+Data engineering, properly. I'm putting more of my work in the open from here —
+fewer one-off exercises, more projects that run on a schedule and have to keep
+running. The goal for 2026 is an internship where pipelines break in ways my
+laptop can't simulate: real volume, real lateness, real upstream schema changes
+at 3am.
 
 **Open to:** data engineering internships · analytics engineering · anything
 where the hard part is the data, not the framework.

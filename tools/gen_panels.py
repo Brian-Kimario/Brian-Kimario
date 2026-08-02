@@ -14,48 +14,39 @@ from theme import (AMBER, BG, CYAN, EDGE, MINT, MONO, MUTED, PANEL, TEXT,
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# name, status, [description lines], [(language, share, colour)], [tags]
+# Public, non-coursework repositories only — three real projects rather than a
+# padded grid. repo, label, [description lines], flow line,
+# [(language, share, colour)], [tags]
 PROJECTS = [
-    ("Matokeo", "ACTIVE", [
-        "Civic data platform for Tanzania's NECTA exam results.",
-        "Scraper → Postgres warehouse → analytics API → dashboards.",
-    ], [("TypeScript", .52, "#3178c6"), ("Python", .40, "#3572A5"),
-        ("PLpgSQL", .08, "#336790")],
-     ["FastAPI", "Next.js 15", "Supabase", "Recharts"]),
+    ("etl_weather", "ETLWeather", [
+        "Airflow 3 pipeline on Astronomer's Astro Runtime, built with the",
+        "TaskFlow API. Goes past the tutorial it started from: idempotent",
+        "upserts, exponential-backoff retries, dynamic task mapping and",
+        "DAG-integrity tests.",
+    ], "Open-Meteo  →  extract  →  transform  →  quality gate  →  Postgres",
+     [("Python", .98, "#3572A5"), ("Dockerfile", .02, "#384d54")],
+     ["Airflow 3", "TaskFlow", "Astro CLI", "Docker", "OrbStack"]),
 
-    ("ETLWeather", "PUBLIC", [
-        "Airflow 3 pipeline on Astro Runtime: Open-Meteo → transform",
-        "→ data-quality gate → Postgres. Idempotent upserts, DAG tests.",
-    ], [("Python", .98, "#3572A5"), ("Docker", .02, "#384d54")],
-     ["Airflow 3", "TaskFlow", "Astro CLI", "OrbStack"]),
+    ("kaggle_etl_pipeline", "Local ETL Pipeline", [
+        "Kaggle e-commerce sales (2023–2025) reshaped into a star schema —",
+        "four dimensions and a fact table — loaded to a DuckDB warehouse and",
+        "exported flat for Tableau. A quality gate halts the run before bad",
+        "data reaches the warehouse.",
+    ], "Kaggle  →  star schema  →  test  →  DuckDB  →  Tableau export",
+     [("Jupyter Notebook", .83, "#DA5B0B"), ("Python", .17, "#3572A5")],
+     ["Prefect", "DuckDB", "Star schema", "pytest"]),
 
-    ("Kaggle ETL Pipeline", "PRIVATE", [
-        "E-commerce sales, raw CSV → star schema → DuckDB warehouse",
-        "→ flat export for Tableau. Orchestrated with Prefect.",
-    ], [("Jupyter", .83, "#DA5B0B"), ("Python", .17, "#3572A5")],
-     ["Prefect", "DuckDB", "Star schema", "Tableau"]),
-
-    ("Admissions System", "PRIVATE", [
-        "University admissions workflow — application intake, review",
-        "and decisioning over a Postgres core.",
-    ], [("TypeScript", .86, "#3178c6"), ("Python", .08, "#3572A5"),
-        ("PLpgSQL", .06, "#336790")],
-     ["Next.js", "Postgres", "RBAC"]),
-
-    ("Dynamic Post Composer", "PUBLIC", [
-        "Multi-platform post composer with per-platform constraint",
-        "validation, JWT auth, role-based access and a drag calendar.",
-    ], [("JavaScript", .99, "#f1e05a"), ("CSS", .01, "#563d7c")],
-     ["React", "Redux Toolkit", "JWT"]),
-
-    ("Lakehouse Lab", "WIP", [
-        "Working through lakehouse storage layers and query engines",
-        "— the layer under everything else on this list.",
-    ], [("Python", 1.0, "#3572A5")],
-     ["Parquet", "DuckDB", "Layered storage"]),
+    ("dynamic-post-composer", "Dynamic Post Composer", [
+        "Compose one draft, validate it against the character limits of",
+        "Facebook, X, LinkedIn and Instagram at once. Normalised Redux",
+        "Toolkit store, JWT auth with stateless sessions, role-based access,",
+        "and a drag-to-reorder content calendar.",
+    ], "compose  →  validate per platform  →  save draft  →  schedule",
+     [("JavaScript", .99, "#f1e05a"), ("CSS", .01, "#563d7c")],
+     ["React", "Redux Toolkit", "JWT", "RBAC"]),
 ]
 
-STATUS_COLOUR = {"ACTIVE": MINT, "PUBLIC": CYAN, "PRIVATE": MUTED, "WIP": AMBER}
+ACCENTS = [CYAN, MINT, VIOLET]
 
 # group, [(tool, proficiency 0..1)]
 STACK = [
@@ -77,64 +68,76 @@ W = 1000
 # ---------------------------------------------------------------- projects
 
 def projects_svg():
-    cw, ch, gx, gy = 484, 140, 16, 14
-    top = 62
-    rows = (len(PROJECTS) + 1) // 2
-    h = top + rows * ch + (rows - 1) * gy + 18
+    """Full-width cards: three projects with room to say what they do."""
+    cw, ch, gy, top = 968, 158, 14, 62
+    split = 620                       # where the text column hands over to meta
+    h = top + len(PROJECTS) * ch + (len(PROJECTS) - 1) * gy + 18
 
     out = [panel_open(W, h, "PROJECTS.LIST",
-                      "6 selected · 2 public · 4 private")]
+                      f"{len(PROJECTS)} selected · all public")]
 
-    for i, (name, status, desc, langs, tags) in enumerate(PROJECTS):
-        x = 16 + (i % 2) * (cw + gx)
-        y = top + (i // 2) * (ch + gy)
-        delay = 0.15 + i * 0.11
+    for i, (repo, title, desc, flow, langs, tags) in enumerate(PROJECTS):
+        x, y = 16, top + i * (ch + gy)
+        accent = ACCENTS[i % len(ACCENTS)]
 
-        out.append(f'<g>{reveal(delay)}')
+        out.append(f'<g>{reveal(0.15 + i * 0.14)}')
         out.append(f'<rect x="{x}" y="{y}" width="{cw}" height="{ch}" rx="10"'
                    f' fill="{PANEL}" stroke="{EDGE}"/>')
         out.append(f'<rect x="{x}" y="{y}" width="3" height="{ch}" rx="1.5"'
-                   f' fill="{STATUS_COLOUR[status]}" opacity=".8"/>')
+                   f' fill="{accent}" opacity=".85"/>')
 
-        out.append(f'<text x="{x + 20}" y="{y + 28}" font-family="{MONO}"'
-                   f' font-size="14.5" fill="{TEXT}" font-weight="600">'
-                   f'{esc(name)}</text>')
-        sc = STATUS_COLOUR[status]
-        out.append(f'<rect x="{x + cw - 20 - len(status) * 7.2 - 14}"'
-                   f' y="{y + 15}" width="{len(status) * 7.2 + 14}" height="19"'
-                   f' rx="9.5" fill="{sc}" opacity=".13"/>')
-        out.append(f'<text x="{x + cw - 27}" y="{y + 28.5}" text-anchor="end"'
-                   f' font-family="{MONO}" font-size="9.5" letter-spacing="1.1"'
-                   f' fill="{sc}">{status}</text>')
+        out.append(f'<text x="{x + 24}" y="{y + 32}" font-family="{MONO}"'
+                   f' font-size="16" fill="{TEXT}" font-weight="600">'
+                   f'{esc(title)}</text>')
+        out.append(f'<text x="{x + 24 + len(title) * 9.9 + 14}" y="{y + 32}"'
+                   f' font-family="{MONO}" font-size="11.5" fill="{MUTED}">'
+                   f'{esc(repo)}</text>')
 
         for j, line in enumerate(desc):
-            out.append(f'<text x="{x + 20}" y="{y + 50 + j * 15}"'
+            out.append(f'<text x="{x + 24}" y="{y + 58 + j * 17}"'
                        f' font-family="{MONO}" font-size="11.5" fill="{MUTED}">'
                        f'{esc(line)}</text>')
 
-        # stacked language bar
-        bx, bw = x + 20, cw - 40
-        out.append(f'<rect x="{bx}" y="{y + 88}" width="{bw}" height="4"'
-                   f' rx="2" fill="#0d1424"/>')
+        # the shape of the pipeline, which is the point of these projects
+        out.append(f'<rect x="{x + 24}" y="{y + ch - 38}" width="{split - 48}"'
+                   f' height="26" rx="6" fill="{accent}" opacity=".07"/>')
+        out.append(f'<text x="{x + 38}" y="{y + ch - 20}" font-family="{MONO}"'
+                   f' font-size="10.5" fill="{accent}">{esc(flow)}</text>')
+
+        out.append(f'<line x1="{x + split}" y1="{y + 18}" x2="{x + split}"'
+                   f' y2="{y + ch - 18}" stroke="{EDGE}"/>')
+
+        # meta column: language split, then tags
+        bx, bw = x + split + 26, cw - split - 50
+        out.append(f'<rect x="{bx}" y="{y + 26}" width="{bw}" height="5"'
+                   f' rx="2.5" fill="#0d1424"/>')
         off = 0.0
         for _, share, colour in langs:
             seg = bw * share
-            out.append(f'<rect x="{bx + off:.1f}" y="{y + 88}"'
-                       f' width="{max(seg - 1.5, 1):.1f}" height="4" rx="2"'
+            out.append(f'<rect x="{bx + off:.1f}" y="{y + 26}"'
+                       f' width="{max(seg - 2, 1):.1f}" height="5" rx="2.5"'
                        f' fill="{colour}"/>')
             off += seg
-        lang_txt = "  ".join(f"{n} {s * 100:.0f}%" for n, s, _ in langs)
-        out.append(f'<text x="{bx}" y="{y + 107}" font-family="{MONO}"'
-                   f' font-size="10.5" fill="{MUTED}">{esc(lang_txt)}</text>')
+        for j, (name, share, colour) in enumerate(langs):
+            ly = y + 52 + j * 19
+            out.append(f'<circle cx="{bx + 4}" cy="{ly - 4}" r="3.6"'
+                       f' fill="{colour}"/>')
+            out.append(f'<text x="{bx + 15}" y="{ly}" font-family="{MONO}"'
+                       f' font-size="11" fill="{TEXT}">{esc(name)}</text>')
+            out.append(f'<text x="{bx + bw}" y="{ly}" text-anchor="end"'
+                       f' font-family="{MONO}" font-size="10.5" fill="{MUTED}">'
+                       f'{share * 100:.0f}%</text>')
 
-        tx = bx
+        tx, ty = bx, y + 52 + len(langs) * 19 + 12
         for tag in tags:
             tw = len(tag) * 6.6 + 16
-            if tx + tw > x + cw - 20:
+            if tx + tw > bx + bw:                 # wrap instead of clipping
+                tx, ty = bx, ty + 23
+            if ty > y + ch - 12:
                 break
-            out.append(f'<rect x="{tx}" y="{y + 114}" width="{tw:.0f}"'
-                       f' height="17" rx="4" fill="{VIOLET}" opacity=".10"/>')
-            out.append(f'<text x="{tx + tw / 2:.0f}" y="{y + 126}"'
+            out.append(f'<rect x="{tx:.0f}" y="{ty}" width="{tw:.0f}"'
+                       f' height="18" rx="4" fill="{VIOLET}" opacity=".10"/>')
+            out.append(f'<text x="{tx + tw / 2:.0f}" y="{ty + 13}"'
                        f' text-anchor="middle" font-family="{MONO}"'
                        f' font-size="10.5" fill="{VIOLET}">{esc(tag)}</text>')
             tx += tw + 7
