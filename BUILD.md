@@ -11,6 +11,7 @@ tools/
   gen_panels.py    assets/projects.svg, assets/stack.svg
   gen_stats.py     assets/stats.svg    — live, run by CI daily
   build.sh         regenerates everything except stats
+  preview.html     open in a browser to check the panels locally
 ```
 
 ## Why SVG and not a GIF
