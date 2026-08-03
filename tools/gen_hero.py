@@ -234,7 +234,7 @@ DOSSIER = [
     ("Origin", "Tanzania", MINT),
     ("Education", "CSE · Data Science · Chandigarh Univ.", TEXT),
     ("Role", "Analytics · Engineering · Science", VIOLET),
-    ("Focus", "Competent across all three, not one lane", AMBER),
+    ("Focus", "Data everything — all three, not one lane", AMBER),
     None,
     ("#", "TOOLCHAIN", None),
     ("Core.Lang", "Python · SQL · TypeScript · Java", TEXT),

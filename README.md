@@ -4,11 +4,13 @@
 
 <br><br>
 
-**I'd rather be useful across the whole data stack than expert in one slice of it.**
+# Data everything.
+
+**Analytics. Engineering. Science.** I'd rather be useful across the whole data
+stack than expert in one slice of it.
 
 CSE undergrad specialising in Data Science, from Tanzania 🇹🇿 — working toward
-real competence in analytics, engineering and science rather than picking a
-lane early.
+real competence in all three rather than picking a lane early.
 
 <br>
 
