@@ -44,22 +44,33 @@ PROJECTS = [
     ], "compose  →  validate per platform  →  save draft  →  schedule",
      [("JavaScript", .99, "#f1e05a"), ("CSS", .01, "#563d7c")],
      ["React", "Redux Toolkit", "JWT", "RBAC"]),
+
+    ("leetcode_cc", "LeetCode Log", [
+        "Solutions committed straight out of LeetCode by LeetHub v2, each",
+        "one filed under the topics it exercises — arrays, binary search,",
+        "hash tables, sliding window. Keeps the algorithm side sharp while",
+        "the rest of the work is pipelines and analysis.",
+    ], "solve  →  auto-commit  →  write-up  →  topic index",
+     [("Python", 1.0, "#3572A5")],
+     ["Algorithms", "LeetHub v2", "Interview prep"]),
 ]
 
-ACCENTS = [CYAN, MINT, VIOLET]
+# No repo-count note: the list is curated, and a stale number reads worse than
+# no number at all.
+ACCENTS = [CYAN, MINT, VIOLET, AMBER]
 
 # group, [(tool, proficiency 0..1)]
 STACK = [
-    ("ORCHESTRATION", [("Apache Airflow 3", .85), ("Prefect", .70),
-                       ("Astro Runtime", .70), ("Cron / GH Actions", .80)]),
-    ("DATA & STORAGE", [("PostgreSQL", .85), ("DuckDB", .75), ("Supabase", .80),
-                        ("SQLite", .85), ("Pandas", .80)]),
-    ("LANGUAGES", [("Python", .90), ("TypeScript", .80), ("SQL", .85),
+    ("LANGUAGES", [("Python", .90), ("SQL", .85), ("TypeScript", .80),
                    ("Java", .65)]),
-    ("APPLICATION", [("FastAPI", .85), ("Next.js 15", .80), ("Tailwind", .80),
-                     ("Redux Toolkit", .70)]),
-    ("PLATFORM", [("Docker", .75), ("Git / GitHub", .90), ("Vercel", .80),
-                  ("OrbStack", .70)]),
+    ("ANALYSIS", [("Pandas", .80), ("NumPy", .70), ("Jupyter", .85),
+                  ("Tableau", .65)]),
+    ("ORCHESTRATION", [("Apache Airflow 3", .85), ("Prefect", .70),
+                       ("Astro Runtime", .70), ("GitHub Actions", .80)]),
+    ("DATA & STORAGE", [("PostgreSQL", .85), ("DuckDB", .75), ("Supabase", .80),
+                        ("SQLite", .85)]),
+    ("APP & PLATFORM", [("FastAPI", .85), ("Next.js 15", .80), ("Docker", .75),
+                        ("Vercel", .80)]),
 ]
 
 W = 1000
