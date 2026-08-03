@@ -35,20 +35,19 @@ def panel_close():
     return "</svg>"
 
 
-REVEAL_SPAN = 2.2
-
-
-def reveal(delay):
+def reveal(_delay):
     """
-    Staggered fade-in as a single SMIL timeline. Kept off CSS deliberately: a
-    stylesheet entrance starting at opacity:0 renders the panel permanently
-    blank anywhere the stylesheet is ignored, whereas an element that is opaque
-    by default just skips the animation and shows its finished state.
+    Entrance animations are disabled, deliberately, and this returns nothing.
+
+    It used to emit a staggered SMIL fade from opacity:0. That is load-bearing
+    animation: if the timeline never advances — which is exactly what happened
+    to hero.svg on the profile page — every element it decorates stays at
+    opacity 0 and the panel renders blank, with no clue as to why. A profile
+    has to be legible on first paint, so nothing here may depend on motion.
+    Kept as a no-op so call sites read unchanged; the only animation left in
+    this project is the particle morph, which is decorative by construction.
     """
-    d = min(delay / REVEAL_SPAN, 0.96)
-    return (f'<animate attributeName="opacity" dur="{REVEAL_SPAN}s"'
-            f' fill="freeze" keyTimes="0;{d:.3f};{min(d + 0.12, 1):.3f};1"'
-            f' values="0;0;1;1"/>')
+    return ""
 
 
 def esc(s):
