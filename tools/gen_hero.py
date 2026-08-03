@@ -21,7 +21,8 @@ TOOLS = ROOT / "tools"
 
 # ---------------------------------------------------------------- config
 
-N = 2600              # particle count (~50 KB gzipped; GitHub serves gzip)
+N = 1400              # particle count; keep the emitted SVG well under ~600 KB
+                      # so the profile page can actually drive the SMIL timeline
 SEED = 70329          # reg-number seed, so rebuilds are reproducible
 CANVAS = (78, 122, 372, 416)   # x, y, w, h of the particle box inside the SVG
 DUR = 26              # seconds per full loop
@@ -285,7 +286,7 @@ def build_svg(particles):
         label, value, colour = row
         if label == "#":
             rows.append(
-                f'<g>{reveal(delay)}'
+                f'<g>'
                 f'<text x="500" y="{y}" font-family="{MONO}" font-size="10.5"'
                 f' letter-spacing="2.6" fill="{VIOLET}">{value}</text>'
                 f'<path d="M{500 + 7.2 * len(value) + 14} {y - 4}H968"'
@@ -297,8 +298,7 @@ def build_svg(particles):
             rows.append(
                 f'<text x="500" y="{y}" font-family="{MONO}" font-size="12.5">'
                 f'<tspan fill="{MUTED}">{leader}</tspan>'
-                f'<tspan fill="{colour}"> {esc(value)}</tspan>'
-                f'{reveal(delay)}</text>'
+                f'<tspan fill="{colour}"> {esc(value)}</tspan></text>'
             )
             y += 19
 
@@ -318,16 +318,6 @@ def build_svg(particles):
     <rect x="{px - 8}" y="{py - 8}" width="{pw + 16}" height="{ph + 16}" rx="10"/>
   </clipPath>
 </defs>
-<style>
-  @keyframes sweep {{ from {{ transform:translateY(0) }}
-                      to   {{ transform:translateY({ph + 16}px) }} }}
-  @keyframes pulse {{ 0%,100% {{ opacity:.35 }} 50% {{ opacity:1 }} }}
-  .scan {{ animation:sweep 6s linear infinite }}
-  .led  {{ animation:pulse 2.4s ease-in-out infinite }}
-  @media (prefers-reduced-motion:reduce) {{
-    .scan,.led {{ animation:none }}
-  }}
-</style>
 
 <rect width="1000" height="600" rx="14" fill="{BG}"/>
 <rect x=".5" y=".5" width="999" height="599" rx="14" fill="none" stroke="{EDGE}"/>
@@ -341,7 +331,10 @@ def build_svg(particles):
 <text x="92" y="27" font-family="{MONO}" font-size="12" fill="{MUTED}">
   Brian-Kimario / <tspan fill="{TEXT}">IDENTITY.svg</tspan>
 </text>
-<circle class="led" cx="906" cy="23" r="3.5" fill="{MINT}"/>
+<circle cx="906" cy="23" r="3.5" fill="{MINT}">
+  <animate attributeName="opacity" values=".35;1;.35" dur="2.4s"
+           repeatCount="indefinite"/>
+</circle>
 <text x="918" y="27" font-family="{MONO}" font-size="11" letter-spacing="1.4" fill="{MINT}">LIVE</text>
 
 <!-- particle canvas -->
@@ -350,8 +343,11 @@ def build_svg(particles):
       fill="none" stroke="url(#rim)" stroke-width="1.4" opacity=".55"/>
 <ellipse cx="{px + pw / 2}" cy="{py + ph / 2}" rx="{pw * .62}" ry="{ph * .55}" fill="url(#bloom)"/>
 <g clip-path="url(#canvasClip)">
-  <rect class="scan" x="{px - 8}" y="{py - 88}" width="{pw + 16}" height="80"
-        fill="{CYAN}" opacity=".05"/>
+  <rect x="{px - 8}" y="{py - 88}" width="{pw + 16}" height="80"
+        fill="{CYAN}" opacity=".05">
+    <animateTransform attributeName="transform" type="translate" dur="6s"
+                      repeatCount="indefinite" values="0 0;0 {ph + 104}"/>
+  </rect>
 </g>
 {particles}
 
