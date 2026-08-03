@@ -84,13 +84,13 @@ framework.
 
 ---
 
+<!-- One <sub> per line, no blank lines inside them: <sub> is an inline element,
+     so blank-line-separated markdown makes GitHub emit block <p>s inside it and
+     the lines render stacked on top of each other. -->
 <div align="center">
-<sub>
-
-Every panel above is generated from source in [`tools/`](./tools) — no builder
-site, no screenshot. The portrait is ~1,400 SMIL-animated particles sampled from
-one photo; the stats refresh themselves daily from the GitHub API.
-See [`BUILD.md`](./BUILD.md) if you want to take it apart.
-
-</sub>
+<sub>Every panel above is generated from source in <a href="./tools"><code>tools/</code></a> — no builder site, no screenshot.</sub>
+<br>
+<sub>The portrait is ~1,400 SMIL-animated particles sampled from one photo; the stats refresh themselves daily from the GitHub API.</sub>
+<br>
+<sub>See <a href="./BUILD.md"><code>BUILD.md</code></a> if you want to take it apart.</sub>
 </div>
